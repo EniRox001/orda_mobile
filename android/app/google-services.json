@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "304152739241",
+    "project_id": "orda-61252",
+    "storage_bucket": "orda-61252.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304152739241:android:83f5f4fd42d8b5a193d8b8",
+        "android_client_info": {
+          "package_name": "com.example.orda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHdImaMaZcQCuMlHn5lm0Ela0h9JMAGsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
