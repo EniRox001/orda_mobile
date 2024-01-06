@@ -8,13 +8,17 @@ environment:
 
 dependencies:
   awesome_snackbar_content: ^0.1.3
+  custom_sliding_segmented_control: ^1.8.1
   firebase_auth: ^4.15.3
   firebase_core: ^2.24.2
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.0
+  flutter_svg: ^2.0.9
   go_router: ^13.0.0
+  google_sign_in: ^6.2.1
   json_annotation: ^4.8.0
+  logger: ^2.0.2+1
   signals: ^2.1.10
 
 dev_dependencies:
@@ -27,3 +31,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/

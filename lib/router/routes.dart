@@ -1,24 +1,30 @@
 import 'package:go_router/go_router.dart';
 import 'package:orda/router/paths.dart';
-import 'package:orda/views/auth/signin.dart';
-import 'package:orda/views/auth/signup.dart';
+import 'package:orda/views/auth/auth.dart';
+import 'package:orda/views/auth/auth_home.dart';
 import 'package:orda/views/home/home.dart';
 
 /// The app router.
-final appRouter = GoRouter(
-  initialLocation: RoutePaths.signup,
-  routes: [
-    GoRoute(
-      path: RoutePaths.signup,
-      builder: (context, state) => const Signup(),
-    ),
-    GoRoute(
-      path: RoutePaths.signin,
-      builder: (context, state) => const Signin(),
-    ),
-    GoRoute(
-      path: RoutePaths.home,
-      builder: (context, state) => const Home(),
-    ),
-  ],
-);
+class AppRouter {
+  /// The app router.
+  static final router = GoRouter(
+    initialLocation: RoutePaths.authHome,
+    routes: [
+      GoRoute(
+        path: RoutePaths.authHome,
+        builder: (context, state) => const AuthHome(),
+      ),
+      GoRoute(
+        path: RoutePaths.auth,
+        builder: (context, state) => const Auth(),
+      ),
+      GoRoute(
+        path: RoutePaths.home,
+        builder: (context, state) => const Home(),
+      ),
+    ],
+  );
+
+  /// Go to the home screen.
+  static void goToHome() => router.go(RoutePaths.home);
+}

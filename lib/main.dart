@@ -31,7 +31,7 @@ class Orda extends StatelessWidget {
           ),
           title: 'Orda',
           debugShowCheckedModeBanner: false,
-          routerConfig: appRouter,
+          routerConfig: AppRouter.router,
         );
       },
     );

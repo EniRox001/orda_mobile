@@ -1,27 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-/// The snackbar content for responses.
-void showSnackbar(
-  BuildContext context,
-  String title,
-  String message,
-  ContentType contentType,
-) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      content: AwesomeSnackbarContent(
-        title: title,
-        message: message,
-        contentType: contentType,
-      ),
-    ),
-  );
-}
+import 'package:orda/contants/enums/auth_states.dart';
+import 'package:orda/signals/auth_signals.dart';
+import 'package:orda/widgets/orda_notifications.dart';
 
 /// The signup screen.
 class Signup extends StatefulWidget {
@@ -35,6 +17,31 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  AuthSignals authSignals = AuthSignals();
+
+  Future<void> _signup() async {
+    await authSignals
+        .signup(
+          _emailController.text,
+          _passwordController.text,
+        )
+        .then(
+          (value) => value == AuthStates.success
+              ? OrdaNotifications.showSnackbar(
+                  context,
+                  'Success',
+                  'You have successfully signed up',
+                  ContentType.success,
+                )
+              : OrdaNotifications.showSnackbar(
+                  context,
+                  'Error',
+                  'An error occurred',
+                  ContentType.warning,
+                ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +66,7 @@ class _SignupState extends State<Signup> {
               ),
               ScreenUtil().setVerticalSpacing(20),
               ElevatedButton(
-                // onPressed: _signup,
-                onPressed: () {},
+                onPressed: _signup,
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
