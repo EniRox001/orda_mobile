@@ -25,9 +25,8 @@ class Orda extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp.router(
-          theme: ThemeData.dark().copyWith(
+          theme: ThemeData.light().copyWith(
             primaryColor: Colors.red,
-            scaffoldBackgroundColor: Colors.black,
           ),
           title: 'Orda',
           debugShowCheckedModeBanner: false,

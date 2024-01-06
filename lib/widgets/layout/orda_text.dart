@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// The Orda Text widget.
 class OrdaText extends StatelessWidget {
@@ -8,39 +9,85 @@ class OrdaText extends StatelessWidget {
   const OrdaText({
     required this.text,
     required this.context,
-    super.key,
     this.style,
+    this.color,
+    this.isBold,
+    super.key,
   });
 
   /// Creates the Orda Text widget with the given [text]
   /// and headlineSmall text style.
-  OrdaText.headlineSmall(BuildContext context, String text)
-      : this(
+  OrdaText.headlineSmall(
+    BuildContext context,
+    String text, {
+    Color? color,
+    bool? isBold,
+  }) : this(
           context: context,
           text: text,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: GoogleFonts.workSans(
+            textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: isBold ?? false == true
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: color,
+                ),
+          ),
         );
 
   /// Creates the Orda Text widget with the given [text]
   /// and labelLarge text style.
-  OrdaText.button(BuildContext context, String text)
-      : this(
+  OrdaText.labelLarge(
+    BuildContext context,
+    String text, {
+    Color? color,
+    bool? isBold,
+  }) : this(
           context: context,
           text: text,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: GoogleFonts.workSans(
+            textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontWeight: isBold ?? false == true
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: color,
+                ),
+          ),
         );
 
   /// Creates the Orda Text widget with the given [text].
-  const OrdaText.body(BuildContext context, String text)
-      : this(context: context, text: text, style: null);
-
-  /// Creates the Orda Text widget with the given [text]
-  /// and bodySmall text style.
-  OrdaText.bodySmall(BuildContext context, String text)
+  OrdaText.body(BuildContext context, String text, {Color? color, bool? isBold})
       : this(
           context: context,
           text: text,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: GoogleFonts.workSans(
+            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: isBold ?? false == true
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: color,
+                ),
+          ),
+        );
+
+  /// Creates the Orda Text widget with the given [text]
+  /// and bodySmall text style.
+  OrdaText.bodySmall(
+    BuildContext context,
+    String text, {
+    Color? color,
+    bool? isBold,
+  }) : this(
+          context: context,
+          text: text,
+          style: GoogleFonts.workSans(
+            textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontWeight: isBold ?? false == true
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: color,
+                ),
+          ),
         );
 
   /// Creates the build context.
@@ -51,6 +98,12 @@ class OrdaText extends StatelessWidget {
 
   /// The text style of the widget.
   final TextStyle? style;
+
+  /// The style color of the widget.
+  final Color? color;
+
+  /// Boolean value to check if the text is bold.
+  final bool? isBold;
 
   @override
   Widget build(BuildContext context) {

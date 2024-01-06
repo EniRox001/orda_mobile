@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:orda/views/auth/widgets/signin.dart';
 import 'package:orda/views/auth/widgets/signup.dart';
+import 'package:orda/widgets/layout/orda_text.dart';
 
 /// the signup screen.
 class Auth extends StatefulWidget {
@@ -30,9 +31,9 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: EdgeInsets.all(20.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,31 +82,20 @@ class _AuthState extends State<Auth> {
                 color: Colors.white,
                 width: 1.sp,
               ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 10,
-                  offset: Offset(0, 5),
-                ),
-              ],
             ),
             padding: 20.sp,
             initialValue: _currentSelection,
             isStretch: true,
             children: {
-              1: Text(
+              1: OrdaText.bodySmall(
+                context,
                 'Sign In',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color:
-                          _currentSelection == 1 ? Colors.black : Colors.white,
-                    ),
+                color: _currentSelection == 1 ? Colors.black : Colors.white,
               ),
-              2: Text(
+              2: OrdaText.bodySmall(
+                context,
                 'Sign Up',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color:
-                          _currentSelection == 2 ? Colors.black : Colors.white,
-                    ),
+                color: _currentSelection == 2 ? Colors.black : Colors.white,
               ),
             },
             onValueChanged: _onSelectionChanged,
@@ -115,14 +105,8 @@ class _AuthState extends State<Auth> {
           visible: showSkip,
           replacement: SizedBox(width: 40.w),
           child: TextButton(
-            onPressed: () {},
-            child: Text(
-              'Skip',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+            onPressed: () => context.go('/home'),
+            child: OrdaText.bodySmall(context, 'Skip'),
           ),
         ),
       ],

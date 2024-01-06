@@ -30,19 +30,22 @@ class AuthHome extends StatelessWidget {
               const Expanded(child: SizedBox()),
               OrdaText.headlineSmall(context, AppStrings.authHomeTitle),
               Gap.vertical(20),
-              OrdaButton(
-                iconData: Icons.email,
+              OrdaButton.icon(
+                iconData: Icons.email_outlined,
                 label: AppStrings.emailSignInTitle,
                 onPressed: () => context.push(RoutePaths.auth),
+                isOutlined: false,
+                backgroundColor: Colors.deepOrange,
+                foregroundColor: Colors.white,
               ),
               Gap.vertical(20),
-              OrdaButton(
+              OrdaButton.icon(
                 iconData: Icons.phone,
                 label: AppStrings.phoneSignInTitle,
                 onPressed: () {},
               ),
               Gap.vertical(20),
-              OrdaButton(
+              OrdaButton.icon(
                 icon: Assets.icons.googleIcon,
                 label: AppStrings.googleSignInTitle,
                 onPressed: () async {

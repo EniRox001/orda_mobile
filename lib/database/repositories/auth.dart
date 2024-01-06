@@ -1,28 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
+import 'package:orda/contants/enums/auth_states.dart';
+
+/// Logger.
+Logger logger = Logger();
 
 /// The authentication CRUD.
 class AuthRepository {
+  /// setup actionCodeSettings
+  final actionCodeSettings = ActionCodeSettings(
+    url: 'https://orda-1.web.app',
+    handleCodeInApp: true,
+    iOSBundleId: 'com.orda.orda',
+    androidPackageName: 'com.orda.orda',
+    androidInstallApp: true,
+    androidMinimumVersion: '16',
+  );
+
   /// Signs in a user.
-  Future<String> signup(String email, String password) async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  Future<AuthStates> signup(String email) async => FirebaseAuth.instance
+      .sendSignInLinkToEmail(
         email: email,
-        password: password,
+        actionCodeSettings: actionCodeSettings,
+      )
+      // ignore: inference_failure_on_untyped_parameter
+      .catchError((e) => logger.e(e))
+      .then(
+        (value) => AuthStates.success,
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return 'This password is weak';
-      } else if (e.code == 'email-already-in-use') {
-        return 'This email is already in use';
-      } else if (e.code == 'invalid-email') {
-        return 'This email is invalid';
-      } else {
-        return 'An error occurred';
-      }
-    }
-    return 'success';
-  }
 
   /// Gets the currently authenticated user.
   Future<User> getUser() async {

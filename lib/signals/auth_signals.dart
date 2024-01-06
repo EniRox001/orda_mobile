@@ -26,25 +26,17 @@ class AuthSignals {
   }
 
   /// Sign in.
-  Future<AuthStates> signup(
+  Future<AuthStates> signInWithLink(
     String email,
-    String password,
   ) async {
     try {
-      final response = await authRepo.signup(email, password);
-      if (response == 'success') {
-        logger
-          ..i('Signup successful')
-          ..i('User: $authenticatedUser');
-        authenticatedUser = await authRepo.getUser();
-        return AuthStates.success;
-      }
+      final response = await authRepo.signup(email);
+      return response;
     } on FirebaseAuthException catch (e) {
       authenticatedUser = null;
       logger.e(e);
       return AuthStates.error;
     }
-    return AuthStates.error;
   }
 
   /// Sign in with Google.
