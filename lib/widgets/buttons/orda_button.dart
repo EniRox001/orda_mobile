@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:orda/gen/assets.gen.dart';
+import 'package:orda/utils/gap.dart';
 import 'package:orda/widgets/layout/orda_text.dart';
 
 /// Main Button foe Orda
@@ -39,7 +43,7 @@ class OrdaButton extends StatelessWidget {
         );
 
   /// Creates the Orda Button with the given [label] and [icon[.
-  const OrdaButton.icon({
+  OrdaButton.icon({
     required String label,
     required VoidCallback onPressed,
     String? icon,
@@ -55,7 +59,9 @@ class OrdaButton extends StatelessWidget {
           onPressed: onPressed,
           icon: icon,
           iconData: iconData,
-          backgroundColor: backgroundColor,
+          backgroundColor: Platform.isAndroid
+              ? backgroundColor ?? Colors.white
+              : backgroundColor ?? Colors.grey[300],
           foregroundColor: foregroundColor,
           isOutlined: isOutlined,
           isBold: isBold,
@@ -87,35 +93,71 @@ class OrdaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.sp),
+    return Visibility(
+      visible: Platform.isAndroid,
+      replacement: CupertinoButton(
+        borderRadius: BorderRadius.circular(100.r),
+        color: backgroundColor,
+        onPressed: onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: iconData != null,
+              child: Icon(
+                iconData,
+                color: foregroundColor,
+              ),
+            ),
+            Visibility(
+              visible: icon != null,
+              child: SvgPicture.asset(
+                icon ?? Assets.icons.googleIcon,
+                height: 20.sp,
+                width: 20.sp,
+                colorFilter:
+                    ColorFilter.mode(foregroundColor!, BlendMode.srcIn),
+              ),
+            ),
+            Gap.horizontal(10),
+            OrdaText.body(
+              context,
+              label,
+              color: foregroundColor,
+              isBold: isBold,
+            ),
+          ],
         ),
-        side: isOutlined ?? false == true ? const BorderSide() : null,
-        padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
-        minimumSize: Size(double.infinity, 56.0.h),
       ),
-      icon: icon != null
-          ? SvgPicture.asset(
-              icon ?? Assets.icons.googleIcon,
-              colorFilter: ColorFilter.mode(foregroundColor!, BlendMode.srcIn),
-            )
-          : iconData != null
-              ? Icon(
-                  iconData,
-                  color: foregroundColor,
-                )
-              : const SizedBox(),
-      onPressed: onPressed,
-      label: OrdaText.body(
-        context,
-        label,
-        color: foregroundColor,
-        isBold: isBold,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
+          shape: const CircleBorder(),
+          side: isOutlined ?? false == true ? const BorderSide() : null,
+          padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
+          minimumSize: Size(double.infinity, 56.0.h),
+        ),
+        icon: icon != null
+            ? SvgPicture.asset(
+                icon ?? Assets.icons.googleIcon,
+                colorFilter:
+                    ColorFilter.mode(foregroundColor!, BlendMode.srcIn),
+              )
+            : iconData != null
+                ? Icon(
+                    iconData,
+                    color: foregroundColor,
+                  )
+                : const SizedBox(),
+        onPressed: onPressed,
+        label: OrdaText.body(
+          context,
+          label,
+          color: foregroundColor,
+          isBold: isBold,
+        ),
       ),
     );
   }

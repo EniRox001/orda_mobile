@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +34,8 @@ class AuthHome extends StatelessWidget {
               OrdaText.headlineSmall(context, AppStrings.authHomeTitle),
               Gap.vertical(20),
               OrdaButton.icon(
-                iconData: Icons.email_outlined,
+                iconData:
+                    Platform.isIOS ? CupertinoIcons.mail : Icons.email_outlined,
                 label: AppStrings.emailSignInTitle,
                 onPressed: () => context.push(RoutePaths.auth),
                 isOutlined: false,
@@ -40,7 +44,7 @@ class AuthHome extends StatelessWidget {
               ),
               Gap.vertical(20),
               OrdaButton.icon(
-                iconData: Icons.phone,
+                iconData: Platform.isIOS ? CupertinoIcons.phone : Icons.phone,
                 label: AppStrings.phoneSignInTitle,
                 onPressed: () {},
               ),

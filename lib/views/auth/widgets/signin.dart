@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orda/contants/enums/auth_states.dart';
 import 'package:orda/contants/strings/strings.dart';
@@ -68,7 +71,7 @@ class _SigninState extends State<Signin> {
               ),
               Gap.vertical(20),
               OrdaButton.icon(
-                iconData: Icons.phone,
+                iconData: Platform.isIOS ? CupertinoIcons.phone : Icons.phone,
                 label: AppStrings.phoneSignInTitle,
                 onPressed: () {},
               ),
@@ -83,12 +86,18 @@ class _SigninState extends State<Signin> {
           ),
           Gap.vertical(5),
           OrdaText.bodySmall(context, 'No password required'),
-          Gap.vertical(20),
+          Gap.vertical(60),
           OrdaButton.simple(
             backgroundColor: Colors.deepOrange,
             foregroundColor: Colors.white,
             label: 'Continue to Sign in',
             onPressed: _signInWithLink,
+          ),
+          Gap.vertical(10),
+          OrdaText.bodySmall(
+            context,
+            '''
+By continuing with the sign in process, we may send you a one-time verification code email to the email associated with your account, Message and data rates may apply.''',
           ),
         ],
       ),

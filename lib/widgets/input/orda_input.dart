@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:orda/utils/gap.dart';
@@ -37,34 +40,58 @@ class OrdaInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        OrdaText.body(
-          context,
-          label,
-          isBold: true,
-        ),
-        Gap.vertical(10),
-        SizedBox(
-          height: 56.0.h,
-          child: TextField(
+    return Visibility(
+      visible: Platform.isAndroid,
+      replacement: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OrdaText.body(
+            context,
+            label,
+          ),
+          Gap.vertical(10),
+          CupertinoTextField(
+            placeholder: hintText,
+            placeholderStyle: const TextStyle(
+              color: Colors.black38,
+            ),
             controller: controller,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.black12,
-              focusedBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              hintText: hintText,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OrdaText.body(
+            context,
+            label,
+            isBold: true,
+          ),
+          Gap.vertical(10),
+          SizedBox(
+            height: 56.0.h,
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black12,
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                hintText: hintText,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
