@@ -98,8 +98,8 @@ class _AuthState extends State<Auth> {
             child: CustomSlidingSegmentedControl(
               height: 40.sp,
               thumbDecoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.sp),
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(100.r),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
@@ -109,8 +109,8 @@ class _AuthState extends State<Auth> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(10.sp),
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(100.r),
                 border: Border.all(
                   color: Colors.white,
                   width: 1.sp,
@@ -123,12 +123,12 @@ class _AuthState extends State<Auth> {
                 1: OrdaText.bodySmall(
                   context,
                   'Sign In',
-                  color: _currentSelection == 1 ? Colors.black : Colors.white,
+                  color: _currentSelection == 1 ? Colors.white : Colors.black,
                 ),
                 2: OrdaText.bodySmall(
                   context,
                   'Sign Up',
-                  color: _currentSelection == 2 ? Colors.black : Colors.white,
+                  color: _currentSelection == 2 ? Colors.white : Colors.black,
                 ),
               },
               onValueChanged: _onSelectionChanged,

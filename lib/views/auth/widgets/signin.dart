@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orda/contants/enums/auth_states.dart';
 import 'package:orda/contants/strings/strings.dart';
+import 'package:orda/contants/theme/colors.dart';
 import 'package:orda/gen/assets.gen.dart';
 import 'package:orda/router/routes.dart';
 import 'package:orda/signals/auth_signals.dart';
@@ -68,12 +69,16 @@ class _SigninState extends State<Signin> {
                 onPressed: () async {
                   await _signInWithGoogle();
                 },
+                backgroundColor: OrdaColors.blue,
+                foregroundColor: OrdaColors.white,
               ),
               Gap.vertical(20),
               OrdaButton.icon(
                 iconData: Platform.isIOS ? CupertinoIcons.phone : Icons.phone,
                 label: AppStrings.phoneSignInTitle,
                 onPressed: () {},
+                backgroundColor: OrdaColors.black,
+                foregroundColor: OrdaColors.white,
               ),
             ],
           ),

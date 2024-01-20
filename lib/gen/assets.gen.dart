@@ -22,10 +22,22 @@ class $AssetsIconsGen {
   List<String> get values => [appleIcon, googleIcon];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/food_background.jpg
+  AssetGenImage get foodBackground =>
+      const AssetGenImage('assets/images/food_background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [foodBackground];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
